@@ -1,0 +1,380 @@
+
+
+/* カテゴリドロップダウンリスト */
+.dropdown-custom {
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+.dropdown-custommenu {
+
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+
+.dropdown-search:hover{
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    background-color: white;
+}
+
+.dropdown-items:hover{
+    background-color: black;
+    color: white;
+}
+
+
+/* メッセージのスタイル */
+.custom-message {
+    margin: 0 0 0 100px;
+    height: 5vh;
+    width: auto;
+    background-color: #ffffff;
+    color: #000;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    padding: 0 10px 0 10px;
+
+    /* 垂平方向真ん中に合わせ */
+    justify-content: center;
+    /* 垂直方向真ん中に合わせ */
+    align-items: center;
+    /* Flex container-fluidと、子要素Flex Itemになる。
+    Flex container-fluid内のアイテムは、主軸（横方向または縦方向）に沿って柔軟に配置できる */
+    display: flex;
+
+    /* z-indexは値が大きいほど手前側に表示されます */
+    z-index: 999;
+}
+
+
+/* 検索機能のスタイル */
+/* 検索窓 */
+.search-window {
+    width: 160px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.search-window:hover {
+    width: 160px;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* 検索ボタン */
+.search-button {
+    width: 70px;
+    margin: 0px 0px 0px 5px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.search-button:hover {
+    margin: 0px 0px 0px 5px;
+    height: 40px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+
+/* 画面表示幅が500px以下だった時(全体のレスポンシブデザイン) */
+@media screen and (max-width: 500px) {
+
+    .custom-message {
+        margin: 0 0 0 30px;
+        height: 10vh;
+        width: 200px;
+        background-color: #ffffff;
+        color: #000;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+        padding: 0 10px 0 10px;
+    
+        /* 垂平方向真ん中に合わせ */
+        justify-content: center;
+        /* 垂直方向真ん中に合わせ */
+        align-items: center;
+        /* Flex container-fluidと、子要素Flex Itemになる。
+        Flex container-fluid内のアイテムは、主軸（横方向または縦方向）に沿って柔軟に配置できる */
+        display: flex;
+    
+        /* z-indexは値が大きいほど手前側に表示されます */
+        z-index: 999;
+    }
+
+        /* 検索機能のスタイル */
+    /* 検索窓 */
+    .search-window {
+        width: 130px;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+    .search-window:hover {
+        width: 130px;
+        height: 40px;
+        border-radius: 5px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    }
+
+        /* 検索ボタン */
+    .search-button {
+        width: 55px;
+        margin: 0px 0px 0px 5px;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+    .search-button:hover {
+        width: 55px;
+        margin: 0px 0px 0px 5px;
+        height: 40px;
+        border-radius: 5px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+    }
+    
+
+
+}
+
+/* エラーメッセージのスタイル */
+.custom-message-error {
+
+    height: 200px;
+    width: 500px;
+    background-color: #ffffff;
+    color: #000;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+
+    /* 垂平方向真ん中に合わせ */
+    justify-content: center;
+    /* 垂直方向真ん中に合わせ */
+    align-items: center;
+    /* Flex container-fluidと、子要素Flex Itemになる。
+    Flex container-fluid内のアイテムは、主軸（横方向または縦方向）に沿って柔軟に配置できる */
+
+    /* z-indexは値が大きいほど手前側に表示されます */
+    z-index: 999;
+}
+
+
+/* 新規作成ボタンのスタイル */
+.create-button_ {
+    margin-top: 20px;
+
+}
+
+.create-button {
+    position: fixed;
+    right: 10px;
+    top: 104px;
+
+    width: 150px;
+    height: 45px;
+    font-weight: 200;
+
+
+    text-align: center;
+    justify-content: center;
+
+    background-color: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    float: right;
+    padding: 10px;
+
+}
+
+
+
+/* テーブルのスタイル */
+.table-header {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    height: 30px;
+    background-color: #ffffff5a;
+    margin-top: 0px;
+    padding-top: 0px;
+    z-index: 3;
+    width: 100%;
+}
+
+.table-wrap {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+    left: 0px;
+}
+
+.td_line:hover {
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 50px;
+    vertical-align: middle;
+    padding: 0 0px;
+    border: 1px solid #ccc;
+    background-color:#ccc ;
+}
+
+th,
+td {
+
+    width: 200px;
+    height: 50px;
+    vertical-align: middle;
+    padding: 0 0px;
+
+
+}
+
+.fixed01,
+.fixed02 {
+    position: sticky;
+    top: 0;
+    left: 0;
+    color:black;
+    background: white;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        width: 100%;
+        height: 100%;
+
+    }
+}
+
+.fixed01 {
+    z-index: 2;
+}
+
+.fixed02 {
+    z-index: 1;
+}
+
+
+.paginate_item{
+    font-size: 20px;
+}
+
+
+.button {
+    width: 85px;
+    margin: 0px 5px 0px 5px;
+    height: 40px;
+    font-weight: bold;
+
+    background-color: #000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    float: center;
+    padding: 10px;
+}
+
+.button:hover {
+    width: 85px;
+    margin: 0px 5px 0px 5px;
+    height: 40px;
+    font-weight: bold;
+
+    background-color: #c0c0c0;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    float: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+
+/* 型番・品番入力欄のスタイル */
+/* .model_no-column { */
+    /* 改行の禁止 */
+    /* white-space: nowrap; */
+
+    /* はみ出した部分を隠す */
+    /* overflow: hidden; */
+
+    /* テキストのはみ出しを「…」で省略 */
+    /* text-overflow: ellipsis; */
+
+    /* max-width: 200px; */
+/* } */
+
+
+/* 備品名、型番・品番テーブルの値 */
+.word-break{
+    /* overflow-wrap: break-all;
+    max-width: 200px;
+    overflow: hidden; */
+
+
+    /* 改行の禁止 */
+    white-space: nowrap;
+
+    /* はみ出した部分を隠す */
+    overflow: hidden;
+
+    /* テキストのはみ出しを「…」で省略 */
+    text-overflow: ellipsis;
+
+    max-width: 170px;
+}
+
+.image_select {
+    width: 105px;
+    height: 40px;
+    font-weight: bold;
+
+    background-color: #c0c0c0;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    float: center;
+}
+
+.image_select:hover {
+    width: 105px;
+    height: 40px;
+    font-weight: bold;
+
+    background-color: #c0c0c0;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    float: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* 削除、入庫モーダル画面メッセージ点滅表示 */
+.delete_message{
+    color: red;
+    animation: blinking 1s ease-in-out infinite alternate;
+}
+
+@keyframes blinking {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+.storing_message{
+    color: blue;
+    animation: blinking 1s ease-in-out infinite alternate;
+}
