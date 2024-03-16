@@ -338,6 +338,24 @@ td {
     max-width: 170px;
 }
 
+.word-break-detail{
+    /* overflow-wrap: break-all;
+    max-width: 200px;
+    overflow: hidden; */
+
+
+    /* 改行の禁止 */
+    white-space: nowrap;
+
+    /* はみ出した部分を隠す */
+    overflow: hidden;
+
+    /* テキストのはみ出しを「…」で省略 */
+    text-overflow: ellipsis;
+
+    max-width: 300px;
+}
+
 .image_select {
     width: 105px;
     height: 40px;

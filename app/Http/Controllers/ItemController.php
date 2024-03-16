@@ -56,6 +56,20 @@ class ItemController extends Controller
     }
 
     /**
+     * 備品管理ログ
+     */
+    public function itemlog()
+    {
+
+        // modelのItemから全てのデータを受け取る
+        $itemlogs = Itemlog::latest('updated_at')->paginate(6);
+        $itemlogs_all = Itemlog::all();
+        // viewのItemにデータを受け渡す
+
+        return view('item.itemlog', compact('itemlogs', 'itemlogs_all'));
+    }
+
+    /**
      * 備品持出モーダルへ移動後、持出処理
      */
     public function take_out(Request $request, $id)
@@ -102,6 +116,17 @@ class ItemController extends Controller
         //     return redirect()->route('hoge')->with(compact('messages'));
         // }
         // }
+
+        // レコードが20件を超えているかどうかを確認
+        $recordCount = Itemlog::count();
+
+        if ($recordCount > 100) {
+            // レコードを削除
+            $recordsToDelete = Itemlog::orderBy('created_at')->take($recordCount - 100)->get();
+            foreach ($recordsToDelete as $record) {
+                $record->delete();
+            }
+        }
 
         // modelのItemから全てのデータを受け取る
         $items = Item::paginate(6);
@@ -242,6 +267,17 @@ class ItemController extends Controller
                 'detail' => $request->name . "を新規登録",
             ]);
 
+            // レコードが20件を超えているかどうかを確認
+            $recordCount = Itemlog::count();
+
+            if ($recordCount > 100) {
+                // レコードを削除
+                $recordsToDelete = Itemlog::orderBy('created_at')->take($recordCount - 100)->get();
+                foreach ($recordsToDelete as $record) {
+                    $record->delete();
+                }
+            }
+
             Item::latest('updated_at')->paginate(6);
 
             // 備品管理画面へ
@@ -272,6 +308,17 @@ class ItemController extends Controller
             'operation' => "削除",
             'detail' => $item['name'] . "を削除",
         ]);
+
+        // レコードが20件を超えているかどうかを確認
+        $recordCount = Itemlog::count();
+
+        if ($recordCount > 100) {
+            // レコードを削除
+            $recordsToDelete = Itemlog::orderBy('created_at')->take($recordCount - 100)->get();
+            foreach ($recordsToDelete as $record) {
+                $record->delete();
+            }
+        }
 
         Item::latest('updated_at')->paginate(6);
 
@@ -440,7 +487,7 @@ class ItemController extends Controller
             if ($itemlog_id->type <> $request->input('type')) {
                 $detailmsg = $detailmsg . "【保管場所】";
             }
-            
+
             if ($itemlog_id->model_no <> $request->input('model_no')) {
                 $detailmsg = $detailmsg . "【品番】";
             }
@@ -483,13 +530,26 @@ class ItemController extends Controller
 
             Itemlog::create([
                 'item_id' => $item['id'],
-                'item_name' => $item['name'],
-                'item_type' => $item['type'],
+                'item_name' => $request->input('name'),
+                'item_type' =>  $request->input('type'),
                 'user_name' => Auth::user()->name,
                 'user_type' => Auth::user()->user_type,
                 'operation' => "編集",
                 'detail' => $detailmsg . "が更新されました",
             ]);
+
+
+            // レコードが20件を超えているかどうかを確認
+            $recordCount = Itemlog::count();
+
+            if ($recordCount > 100) {
+                // レコードを削除
+                $recordsToDelete = Itemlog::orderBy('created_at')->take($recordCount - 100)->get();
+                foreach ($recordsToDelete as $record) {
+                    $record->delete();
+                }
+            }
+
 
             Item::latest('updated_at')->paginate(6);
 
@@ -528,6 +588,17 @@ class ItemController extends Controller
 
         // $itemを更新する
         $item->save();
+
+        // レコードが20件を超えているかどうかを確認
+        $recordCount = Itemlog::count();
+
+        if ($recordCount > 100) {
+            // レコードを削除
+            $recordsToDelete = Itemlog::orderBy('created_at')->take($recordCount - 100)->get();
+            foreach ($recordsToDelete as $record) {
+                $record->delete();
+            }
+        }
 
         Item::latest('updated_at')->paginate(6);
 
@@ -606,5 +677,43 @@ class ItemController extends Controller
         $items_all = Item::all();
 
         return view('item.used_item', compact('items', 'items_all'));
+    }
+
+
+    // 備品管理ログ(検索)
+    public function itemlog_search(Request $request)
+    {
+        $itemlogs = Itemlog::all();
+
+        $search = $request->input('itemlog_search');
+
+        $query = Itemlog::query();
+
+        // $query = $query->paginate($query->count());
+
+        if (!empty($search)) {
+
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($search, 's');
+
+            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+            // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
+            foreach ($wordArraySearched as $value) {
+
+                $query = Itemlog::where('item_name', 'like', '%' . $value . '%')
+                    ->orWhere('item_type', 'like', '%' . $value . '%')
+                    ->orWhere('user_name', 'like', '%' . $value . '%')
+                    ->orWhere('user_type', 'like', '%' . $value . '%')
+                    ->orWhere('operation', 'like', '%' . $value . '%');
+            }
+        }
+
+        $itemlogs = $query->latest('updated_at')->paginate(6);
+
+        $itemlogs_all = Itemlog::all();
+
+        return view('item.itemlog', compact('itemlogs', 'itemlogs_all'));
     }
 }

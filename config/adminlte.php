@@ -305,6 +305,13 @@ return [
         ],
         [
             // 管理権限キー 'key'  => 'menu1_admin_only', EventServiceProviderへ
+            'key'  => 'menu3_admin_only',
+            'text' => '備品管理ログ',
+            'url'  => 'items/itemlog',
+            'icon' => 'fas fa-server',
+        ],
+        [
+            // 管理権限キー 'key'  => 'menu1_admin_only', EventServiceProviderへ
             'key'  => 'menu2_admin_only',
             'text' => 'ユーザー管理',
             'url'  => 'users',
