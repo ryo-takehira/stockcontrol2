@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Models\Itemlog;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Facades\ResizeImage;
@@ -71,6 +72,16 @@ class ItemController extends Controller
         $model = Item::find($id);
 
         $model->update(['stock' => $model->stock - $used_quantity,]);
+
+        Itemlog::create([
+            'item_id' => $model['id'],
+            'item_name' => $model['name'],
+            'item_type' => $model['type'],
+            'user_name' => Auth::user()->name,
+            'user_type' => Auth::user()->user_type,
+            'operation' => "持出",
+            'detail' => $used_quantity . $model['stock_unit'] . '持出',
+        ]);
 
         // if ($model->stock < $model->minimum_stock) {
         // ②メール送信に使うインスタンスを生成
@@ -218,6 +229,19 @@ class ItemController extends Controller
                 'price' => $request->price,
             ]);
 
+            $latestRecord = Item::latest()->first(); // 最新のレコードを取得
+            $latestId = $latestRecord->id; // 最新のレコードのIDを取得
+
+            Itemlog::create([
+                'item_name' => $request->name,
+                'item_id' => $latestId,
+                'item_type' => $request->type,
+                'user_name' => Auth::user()->name,
+                'user_type' => Auth::user()->user_type,
+                'operation' => "登録",
+                'detail' => $request->name . "を新規登録",
+            ]);
+
             Item::latest('updated_at')->paginate(6);
 
             // 備品管理画面へ
@@ -238,6 +262,16 @@ class ItemController extends Controller
     {
 
         $item->delete();
+
+        Itemlog::create([
+            'item_id' => $item['id'],
+            'item_name' => $item['name'],
+            'item_type' => $item['type'],
+            'user_name' => Auth::user()->name,
+            'user_type' => Auth::user()->user_type,
+            'operation' => "削除",
+            'detail' => $item['name'] . "を削除",
+        ]);
 
         Item::latest('updated_at')->paginate(6);
 
@@ -373,8 +407,89 @@ class ItemController extends Controller
             // print_r($item);
             // exit;
 
+            // $item_id
+
+            // 変更前の値を取得
+            $itemlog_id = Item::find($item_id);
+
+            // attributeの値を確認
+            // dd($itemlog_id->name);
+
+            $item_name = $itemlog_id->name;
+
+            $item_type = $itemlog_id->type;
+            $item_image_name = $itemlog_id->image_name;
+            $item_model_no = $itemlog_id->model_no;
+            $item_order_name = $itemlog_id->order_name;
+            $item_order_phone = $itemlog_id->order_phone;
+            $item_stock_unit = $itemlog_id->stock_unit;
+            $item_stock = $itemlog_id->stock;
+            $item_minimum_stock = $itemlog_id->minimum_stock;
+            $item_order_quantity = $itemlog_id->order_quantity;
+            $item_price = $itemlog_id->price;
+
 
             $item->where('id', $item_id)->update($itemupdate);
+
+            $detailmsg = "";
+
+            if ($itemlog_id->name <> $request->input('name')) {
+                $detailmsg = "【備品名】";
+            }
+
+            if ($itemlog_id->type <> $request->input('type')) {
+                $detailmsg = $detailmsg . "【保管場所】";
+            }
+            
+            if ($itemlog_id->model_no <> $request->input('model_no')) {
+                $detailmsg = $detailmsg . "【品番】";
+            }
+
+            if ($itemlog_id->order_name <> $request->input('order_name')) {
+                $detailmsg = $detailmsg . "【発注先】";
+            }
+
+            if ($itemlog_id->order_phone <> $request->input('order_phone')) {
+                $detailmsg = $detailmsg . "【発注先電話番号】";
+            }
+
+            if ($itemlog_id->stock_unit <> $request->input('stock_unit')) {
+                $detailmsg = $detailmsg . "【在庫単位】";
+            }
+
+            if ($itemlog_id->stock <> $request->input('stock')) {
+                $detailmsg = $detailmsg . "【在庫数】";
+            }
+
+            if ($itemlog_id->minimum_stock <> $request->input('minimum_stock')) {
+                $detailmsg = $detailmsg . "【最低在庫数】";
+            }
+
+
+            if ($itemlog_id->order_quantity <> $request->input('order_quantity')) {
+                $detailmsg = $detailmsg . "【発注数】";
+            }
+
+            if ($itemlog_id->price <> $request->input('price')) {
+                $detailmsg = $detailmsg . "【単価】";
+            }
+
+
+            // 更新前更新後の値確認
+            // dd($itemlog_id->price,$request->input('price'));
+
+            // 変更内容確認
+            // dd($detailmsg);
+
+            Itemlog::create([
+                'item_id' => $item['id'],
+                'item_name' => $item['name'],
+                'item_type' => $item['type'],
+                'user_name' => Auth::user()->name,
+                'user_type' => Auth::user()->user_type,
+                'operation' => "編集",
+                'detail' => $detailmsg . "が更新されました",
+            ]);
 
             Item::latest('updated_at')->paginate(6);
 
@@ -400,6 +515,16 @@ class ItemController extends Controller
     {
         // $itemlistのstockは$itemlistのstock足す$itemlistのorders
         $item->stock = $item->stock + $item->order_quantity;
+
+        Itemlog::create([
+            'item_id' => $item['id'],
+            'item_name' => $item['name'],
+            'item_type' => $item['type'],
+            'user_name' => Auth::user()->name,
+            'user_type' => Auth::user()->user_type,
+            'operation' => "入庫",
+            'detail' => $item['order_quantity'] . $item['stock_unit'] . '入庫',
+        ]);
 
         // $itemを更新する
         $item->save();
