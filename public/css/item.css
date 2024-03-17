@@ -338,6 +338,24 @@ td {
     max-width: 170px;
 }
 
+.word-break-detail{
+    /* overflow-wrap: break-all;
+    max-width: 200px;
+    overflow: hidden; */
+
+
+    /* 改行の禁止 */
+    white-space: nowrap;
+
+    /* はみ出した部分を隠す */
+    overflow: hidden;
+
+    /* テキストのはみ出しを「…」で省略 */
+    text-overflow: ellipsis;
+
+    max-width: 300px;
+}
+
 .image_select {
     width: 105px;
     height: 40px;
@@ -377,4 +395,17 @@ td {
 .storing_message{
     color: blue;
     animation: blinking 1s ease-in-out infinite alternate;
+}
+
+
+/* .detail_modal{
+    max-width: 100%;
+    white-space: [pre-line];
+} */
+
+.modal-body {
+    max-width: calc(100% - 30px); /* 画面幅から必要な余白を引いた幅を設定 */
+    margin-right: 15px; /* 右側の余白を設定 */
+    margin-left: 15px; /* 左側の余白を設定 */
+    word-wrap: break-word; /* 幅を超えたら改行して折り返す */
 }

@@ -58,6 +58,12 @@ Route::prefix('items')->middleware(['auth'])->group(function () {
     // 検索機能(ユーザー)
     Route::get('/used_itemsearch',
     [App\Http\Controllers\ItemController::class, 'used_itemsearch']);
+    // 検索機能(ログ)
+    Route::get('/itemlog_search',
+    [App\Http\Controllers\ItemController::class, 'itemlog_search']);
+    // 備品管理ログ
+    Route::get('/itemlog',
+    [App\Http\Controllers\ItemController::class, 'itemlog']);
 });
 
 // ->middleware(['auth'])   ログインしていたら  ->group(function ()へ実行
