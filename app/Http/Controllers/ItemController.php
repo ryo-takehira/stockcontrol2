@@ -489,7 +489,7 @@ class ItemController extends Controller
             }
 
 
- if (!empty($itemlog_id->image_name)) {
+ if (!empty($request->input('image_name')) {
                 $detailmsg = $detailmsg . "【画像】";
             }
 
