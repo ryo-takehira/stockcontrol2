@@ -523,7 +523,7 @@ class ItemController extends Controller
                 $detailmsg = $detailmsg . "【単価】";
             }
 
-            if (empty($detailmsg)) {
+            if (!empty($detailmsg)) {
 
                 Itemlog::create([
                     'item_id' => $item['id'],
