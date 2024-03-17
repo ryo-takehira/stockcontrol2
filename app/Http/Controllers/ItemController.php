@@ -488,6 +488,8 @@ class ItemController extends Controller
                 $detailmsg = $detailmsg . "【保管場所】";
             }
 
+
+
             if ($itemlog_id->model_no <> $request->input('model_no')) {
                 $detailmsg = $detailmsg . "【品番】";
             }
@@ -521,6 +523,30 @@ class ItemController extends Controller
                 $detailmsg = $detailmsg . "【単価】";
             }
 
+            if ($detailmsg <> "") {
+
+                Itemlog::create([
+                    'item_id' => $item['id'],
+                    'item_name' => $request->input('name'),
+                    'item_type' =>  $request->input('type'),
+                    'user_name' => Auth::user()->name,
+                    'user_type' => Auth::user()->user_type,
+                    'operation' => "編集",
+                    'detail' => $detailmsg . "を更新",
+                ]);
+
+
+                // レコードが20件を超えているかどうかを確認
+                $recordCount = Itemlog::count();
+
+                if ($recordCount > 100) {
+                    // レコードを削除
+                    $recordsToDelete = Itemlog::orderBy('created_at')->take($recordCount - 100)->get();
+                    foreach ($recordsToDelete as $record) {
+                        $record->delete();
+                    }
+                }
+            }
 
             // 更新前更新後の値確認
             // dd($itemlog_id->price,$request->input('price'));
@@ -528,27 +554,7 @@ class ItemController extends Controller
             // 変更内容確認
             // dd($detailmsg);
 
-            Itemlog::create([
-                'item_id' => $item['id'],
-                'item_name' => $request->input('name'),
-                'item_type' =>  $request->input('type'),
-                'user_name' => Auth::user()->name,
-                'user_type' => Auth::user()->user_type,
-                'operation' => "編集",
-                'detail' => $detailmsg . "を更新",
-            ]);
 
-
-            // レコードが20件を超えているかどうかを確認
-            $recordCount = Itemlog::count();
-
-            if ($recordCount > 100) {
-                // レコードを削除
-                $recordsToDelete = Itemlog::orderBy('created_at')->take($recordCount - 100)->get();
-                foreach ($recordsToDelete as $record) {
-                    $record->delete();
-                }
-            }
 
 
             Item::latest('updated_at')->paginate(6);
