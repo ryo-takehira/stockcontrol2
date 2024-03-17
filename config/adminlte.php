@@ -308,14 +308,14 @@ return [
             'key'  => 'menu3_admin_only',
             'text' => '備品管理ログ',
             'url'  => 'items/itemlog',
-            'icon' => 'fas fa-server',
+            'icon' => 'fas fa-history',
         ],
         [
             // 管理権限キー 'key'  => 'menu1_admin_only', EventServiceProviderへ
             'key'  => 'menu2_admin_only',
             'text' => 'ユーザー管理',
             'url'  => 'users',
-            'icon' => 'fas fa-users-cog',
+            'icon' => 'far fa-address-book',
         ],
 
         [

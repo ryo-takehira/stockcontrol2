@@ -264,7 +264,7 @@ class ItemController extends Controller
                 'user_name' => Auth::user()->name,
                 'user_type' => Auth::user()->user_type,
                 'operation' => "登録",
-                'detail' => $request->name . "を新規登録",
+                'detail' => $request->name . "を登録",
             ]);
 
             // レコードが20件を超えているかどうかを確認
@@ -535,7 +535,7 @@ class ItemController extends Controller
                 'user_name' => Auth::user()->name,
                 'user_type' => Auth::user()->user_type,
                 'operation' => "編集",
-                'detail' => $detailmsg . "が更新されました",
+                'detail' => $detailmsg . "を更新",
             ]);
 
 

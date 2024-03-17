@@ -39,9 +39,10 @@
                                     <th class="fixed02">保管場所</th>
                                     <th class="fixed02">ユーザー名</th>
                                     <th class="fixed02">所属部署</th>
+                                    <th class="fixed02">操作内容</th>
+                                    <th class="fixed02">操作詳細</th>
+                                    <th class="fixed02">操作日時</th>
                                     <th class="fixed02">操作</th>
-                                    <th class="fixed02">詳細</th>
-                                    <th class="fixed02">更新日時</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,6 +57,15 @@
                                     <td class="align-middle">{{ $itemlog->operation}}</td>
                                     <td class="align-middle word-break-detail">{{ $itemlog->detail}}</td>
                                     <td class="align-middle">{{ $itemlog->updated_at}}</td>
+                                    <td class="align-middle">
+                                        <!-- ログ詳細ボタン -->
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#itemlogModalLabel{{ $itemlog->id }}">
+                                            詳細
+                                        </button>
+                                        <!-- 備品詳細モーダル -->
+                                        @include('modals.itemlog_modal', ['itemlog' => $itemlog])
+                                    </td>
+
                     </div>
                     </tr>
                     @endforeach
