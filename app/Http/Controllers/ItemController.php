@@ -489,7 +489,7 @@ class ItemController extends Controller
             }
 
 
- if (!empty($request->input('image_name')) {
+ if ($request->hasFile('image_name')) {
                 $detailmsg = $detailmsg . "【画像】";
             }
 
