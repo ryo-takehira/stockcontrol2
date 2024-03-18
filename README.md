@@ -1,43 +1,36 @@
-## 商品管理システム
+## 備品管理システム
 
-### 環境構築手順
+### 概要
 
-* Gitクローン
-* .env.example をコピーして .env を作成
-* MySQLのデータベース作成（名前：item_management）
-* Macの場合 .env の DB_PASSWORD を root に修正（Windowsは修正不要）
+このシステムでは、社内で扱う備品の在庫管理を行うことができます。
+備品の登録、編集、削除、在庫調整を行うことができ、各備品操作のログを見ることができます。
 
-    ```INI
-    DB_PASSWORD=root
-    ```
+### 主な機能
+* ログイン・ログアウト機能
+* 備品一覧画面
+* 備品登録、編集、削除機能
+* 備品在庫管理機能(持出、入庫)
+* 備品検索機能
+* 備品操作ログ
 
-* APP_KEY生成
+### 開発環境
 
-    ```console
-    php artisan key:generate
-    ```
+    php 8.2.4
+    laravel 5.5.2
 
-* Composerインストール
 
-    ```console
-    composer install
-    ```
+### 設計書
 
-* フロント環境構築
+    
+    [設計書ページへ](https://drive.google.com/drive/folders/1Ox3Yha19gyBCGGrMsRRKj81PHPM9-Jv0)
+    
+    
+### システム閲覧
 
-    ```console
-    npm ci
-    npm run build
-    ```
+    [設計書ページへ](https://stockcontrol2-d170b51d1cdd.herokuapp.com)
 
-* マイグレーション
+### テストアカウント情報
+    
+    メールアドレス = takesita@gmail.com
+    パスワード = takesita
 
-    ```console
-    php artisan migrate
-    ```
-
-* 起動
-
-    ```console
-    php artisan serve
-    ```
