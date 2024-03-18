@@ -22,12 +22,12 @@
 ### 設計書
 
     
-    [設計書ページへ](https://drive.google.com/drive/folders/1Ox3Yha19gyBCGGrMsRRKj81PHPM9-Jv0)
+[設計書ページへ](https://drive.google.com/drive/folders/1Ox3Yha19gyBCGGrMsRRKj81PHPM9-Jv0)
     
     
 ### システム閲覧
 
-    [設計書ページへ](https://stockcontrol2-d170b51d1cdd.herokuapp.com)
+[アプリケーションページへ](https://stockcontrol2-d170b51d1cdd.herokuapp.com)
 
 ### テストアカウント情報
     
