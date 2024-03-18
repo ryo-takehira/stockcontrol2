@@ -489,6 +489,10 @@ class ItemController extends Controller
             }
 
 
+ if ($request->hasFile('image_name')) {
+                $detailmsg = $detailmsg . "【画像】";
+            }
+
 
             if ($itemlog_id->model_no <> $request->input('model_no')) {
                 $detailmsg = $detailmsg . "【品番】";
@@ -523,7 +527,7 @@ class ItemController extends Controller
                 $detailmsg = $detailmsg . "【単価】";
             }
 
-            if ($detailmsg <> "") {
+            if (!empty($detailmsg)) {
 
                 Itemlog::create([
                     'item_id' => $item['id'],
