@@ -208,7 +208,7 @@ class ItemController extends Controller
                 // 希望するドライバーで新しいマネージャーでファイルを読み取る
                 $img = $manager->read($image_file);
                 // サイズ変更で圧縮
-                $img->resize(375,500);                
+                $img->resize(375,375);                
 // ピクセレーション効果で圧縮
                 $img = $img->pixelate(0.5);
 
@@ -378,7 +378,7 @@ class ItemController extends Controller
             if ($request->hasFile('image_name')) {
 
                 $image_file = $request->file('image_name');
-                // $image_name = $request->file('image_name')->resize(300, 200);
+                // $image_name = $request->file('image_name')->resize(375, 375);
 
                 // ファイル名を取得(ファイル名.拡張子)
                 $fileNmae = $image_file->getClientOriginalName();
