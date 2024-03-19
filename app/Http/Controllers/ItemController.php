@@ -210,9 +210,8 @@ class ItemController extends Controller
                 // サイズ変更で圧縮
                 $img->resize(375,null, function ($constraint) {
         $constraint->aspectRatio();
-        $constraint->upsize();
-
-                // ピクセレーション効果で圧縮
+        $constraint->upsize();})->encode(null, 70);                
+// ピクセレーション効果で圧縮
                 $img = $img->pixelate(0.5);
 
                 // 保存されたファイルパスを取得し変数に格納する
