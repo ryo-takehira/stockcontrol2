@@ -208,7 +208,7 @@ class ItemController extends Controller
                 // 希望するドライバーで新しいマネージャーでファイルを読み取る
                 $img = $manager->read($image_file);
                 // サイズ変更で圧縮
-                $img->resize(height: 375, width: 500);
+                $img->resize(height: 40%, width: 40%);
 
                 // ピクセレーション効果で圧縮
                 $img = $img->pixelate(0.5);
