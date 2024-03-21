@@ -403,7 +403,14 @@ $img->resize($newWidth, $newHeight);
                 // 希望するドライバーで新しいマネージャーでファイルを読み取る
                 $img = $manager->read($image_file);
                 // サイズ変更で圧縮
-                $img->resize(375,375);
+                // $img->resize(375,375);
+
+$newWidth = 300;
+$aspectRatio = $img->width() / $img->height();
+$newHeight = $newWidth / $aspectRatio;
+
+// アスペクト比を保持してリサイズする
+$img->resize($newWidth, $newHeight);
 
                 // ピクセレーション効果で圧縮
                 $img = $img->pixelate(0.5);
