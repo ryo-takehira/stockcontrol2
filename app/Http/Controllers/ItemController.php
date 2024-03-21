@@ -210,7 +210,7 @@ class ItemController extends Controller
                 // サイズ変更で圧縮
                 // $img->resize(375, 375);
 
-$newWidth = 300;
+$newWidth = 500;
 $aspectRatio = $img->width() / $img->height();
 $newHeight = $newWidth / $aspectRatio;
 
