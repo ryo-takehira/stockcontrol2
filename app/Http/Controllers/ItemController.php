@@ -94,7 +94,7 @@ class ItemController extends Controller
             'user_name' => Auth::user()->name,
             'user_type' => Auth::user()->user_type,
             'operation' => "持出",
-            'detail' => $used_quantity . $model['stock_unit'] . '持出',
+            'detail' => '【' . $used_quantity . $model['stock_unit'] . '】持出',
         ]);
 
         // if ($model->stock < $model->minimum_stock) {
@@ -210,14 +210,14 @@ class ItemController extends Controller
                 // サイズ変更で圧縮
                 // $img->resize(375, 375);
 
-$newWidth = 500;
-$aspectRatio = $img->width() / $img->height();
-$newHeight = $newWidth / $aspectRatio;
+                $newWidth = 500;
+                $aspectRatio = $img->width() / $img->height();
+                $newHeight = $newWidth / $aspectRatio;
 
-// アスペクト比を保持してリサイズする
-$img->resize($newWidth, $newHeight);
-      
-// ピクセレーション効果で圧縮
+                // アスペクト比を保持してリサイズする
+                $img->resize($newWidth, $newHeight);
+
+                // ピクセレーション効果で圧縮
                 // $img = $img->pixelate(0.1);
 
                 // 保存されたファイルパスを取得し変数に格納する
@@ -271,7 +271,7 @@ $img->resize($newWidth, $newHeight);
                 'user_name' => Auth::user()->name,
                 'user_type' => Auth::user()->user_type,
                 'operation' => "登録",
-                'detail' => $request->name . "を登録",
+                'detail' => '【' . $request->name . "】を登録",
             ]);
 
             // レコードが20件を超えているかどうかを確認
@@ -313,7 +313,7 @@ $img->resize($newWidth, $newHeight);
             'user_name' => Auth::user()->name,
             'user_type' => Auth::user()->user_type,
             'operation' => "削除",
-            'detail' => $item['name'] . "を削除",
+            'detail' => '【' . $item['name'] . "】を削除",
         ]);
 
         // レコードが20件を超えているかどうかを確認
@@ -405,12 +405,12 @@ $img->resize($newWidth, $newHeight);
                 // サイズ変更で圧縮
                 // $img->resize(375,375);
 
-$newWidth = 500;
-$aspectRatio = $img->width() / $img->height();
-$newHeight = $newWidth / $aspectRatio;
+                $newWidth = 500;
+                $aspectRatio = $img->width() / $img->height();
+                $newHeight = $newWidth / $aspectRatio;
 
-// アスペクト比を保持してリサイズする
-$img->resize($newWidth, $newHeight);
+                // アスペクト比を保持してリサイズする
+                $img->resize($newWidth, $newHeight);
 
                 // ピクセレーション効果で圧縮
                 // $img = $img->pixelate(0.5);
@@ -503,7 +503,7 @@ $img->resize($newWidth, $newHeight);
             }
 
 
- if ($request->hasFile('image_name')) {
+            if ($request->hasFile('image_name')) {
                 $detailmsg = $detailmsg . "【画像】";
             }
 
@@ -607,7 +607,7 @@ $img->resize($newWidth, $newHeight);
             'user_name' => Auth::user()->name,
             'user_type' => Auth::user()->user_type,
             'operation' => "入庫",
-            'detail' => $item['order_quantity'] . $item['stock_unit'] . '入庫',
+            'detail' => '【' . $item['order_quantity'] . $item['stock_unit'] . '】入庫',
         ]);
 
         // $itemを更新する
