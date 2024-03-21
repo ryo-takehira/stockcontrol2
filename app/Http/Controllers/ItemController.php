@@ -218,7 +218,7 @@ $newHeight = $newWidth / $aspectRatio;
 $img->resize($newWidth, $newHeight);
       
 // ピクセレーション効果で圧縮
-                $img = $img->pixelate(1.0);
+                $img = $img->pixelate(10);
 
                 // 保存されたファイルパスを取得し変数に格納する
                 $path = storage_path('app/public/' . $fileNmae);
